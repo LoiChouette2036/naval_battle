@@ -1,2 +1,23 @@
-<h1>Welcome to the Naval Battle Game!</h1>
+<h1>Welcome to the Naval Battle Game</h1>
 
+<% if user_signed_in? %>
+  <p>Hello, <%= current_user.email %>! You are logged in.</p>
+  <%= link_to 'Create a New Game', new_game_path %>
+<% else %>
+  <%= link_to "Sign up", new_user_registration_path %> |
+  <%= link_to "Log in", new_user_session_path %>
+<% end %>
+
+<h2>Available Games</h2>
+<ul>
+  <% @games.each do |game| %>
+    <li>
+      <%= link_to "Game #{game.id}", game_path(game) %> - Created by: <%= game.creator.email %>
+      <% if game.opponent.nil? %>
+        (waiting for an opponent)
+      <% else %>
+        Opponent: <%= game.opponent.email %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
