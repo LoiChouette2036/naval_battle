@@ -7,6 +7,8 @@
 <% if @game.opponent.nil? %>
   <p>This game does not have an opponent yet.</p>
   <%= link_to "Join Game", join_game_path(@game), method: :patch, data: { turbo_method: :patch } %>
+  <!-- Using method: :patch to send a PATCH request to update the opponent.
+     Added data: { turbo_method: :patch } to ensure Turbo sends the request as a PATCH instead of defaulting to GET -->
 <% else %>
   <p>Opponent: <%= @game.opponent.email %></p>
 <% end %>
