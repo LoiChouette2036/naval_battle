@@ -10,13 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_28_230145) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_29_042658) do
   create_table "games", force: :cascade do |t|
     t.integer "creator_id", null: false
     t.integer "opponent_id"
     t.string "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "creator_own_grid", default: []
+    t.json "creator_guess_grid", default: []
+    t.json "opponent_own_grid", default: []
+    t.json "opponent_guess_grid", default: []
     t.index ["creator_id"], name: "index_games_on_creator_id"
     t.index ["opponent_id"], name: "index_games_on_opponent_id"
   end
